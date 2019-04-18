@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SPACE SHOOTER</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Germania+One" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
+</head>
+<body>
+
+    <div id="main" class="wrap">
+        <div id="controlPanel" class="d-flex justify-content-around">
+            <div class="d-flex align-items-center">
+                <button class="btn  btn-dark" id="startButton" disabled onclick="levels[0].start();">Start</button>
+                <button class="btn btn-dark" onclick="modals.store.open();">Store</button>
+                <button class="btn btn-dark" onclick="modals.options.open();">Options</button>
+                <button class="btn btn-dark" onclick="modals.rules.open();">Rules</button>
+                <button class="btn btn-dark" onclick="modals.records.open();">Records</button>
+            </div>
+
+            <div id="scoreBlock" class="d-flex align-items-center">
+                <div>
+                    SCORE = <em id="score">0</em>
+                    </br>
+                    <div class="moneycolor">
+                        MONEY = <em id="money">0 </em>
+                    </div>
+                </div>
+            </div>
+            <div id="userBlock" class="d-flex align-items-center">
+                <div>Hello,</br><em id="userName"></em></div>
+            </div>
+            <div class="d-flex align-items-center">
+                <button class="btn btn-dark" id="nameButton" onclick="modals.register.open();">Name</button>
+            </div>
+        </div>
+
+        <div id="store">
+            <div class="d-flex align-items-start flex-column modalMain">
+                <div class="mb-auto p-2 fullwidth">
+                    <div class="d-flex justify-content-around">
+                        <h2>Second Gun</h2>
+                        <button onclick="store.second();" id="secondGun" class="btn btn-outline-warning">200
+                            money</button>
+                    </div>
+                    <div class="d-flex justify-content-around">
+                        <h2>Third Gun</h2>
+                        <button onclick="store.third();" id="thirdGun" class="btn btn-outline-warning">500
+                            money</button>
+                    </div>
+                    <div class="d-flex justify-content-around">
+                        <h2>+15% Speed</h2>
+                        <button onclick="store.speed();" id="speedUp" class="btn btn-outline-warning">60
+                            money</button>
+                    </div>
+                    <div class="d-flex justify-content-around">
+                        <h2>+1 Hp </h2>
+                        <button onclick="store.hp();" id="hpUp" class="btn btn-outline-warning">40 money</button>
+                    </div>
+                </div>
+                <div class="p-2 fullwidth">
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-outline-dark newclass"
+                            onclick="modals.store.close();">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="options">
+            <div class="d-flex align-items-start flex-column modalMain">
+                <div class="mb-auto p-2 fullwidth">
+                    <div class="d-flex justify-content-center">
+                        <label class="cbLabel">Music
+                            <input type="checkbox" id="music" checked onchange="options.music();">
+                        </label>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <label class="cbLabel">Sounds
+                            <input type="checkbox" id="sounds" checked onchange="options.sounds();">
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-auto p-2 fullwidth">
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-dark" onclick="openFullscreen();">Open Fullscreen</button>
+                    </div>
+                </div>
+                <div class="p-2 fullwidth">
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-outline-dark"
+                            onclick="modals.options.close();">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="rules">
+            <div class="d-flex align-items-start flex-column modalMain">
+                <div class="mb-auto p-2">
+                    <h2>Game rules:</h2>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, inventore impedit?
+                    Unde, excepturi. Voluptatibus, molestias nostrum at similique sit deserunt commodi
+                    dolor Laboriosam, quia ipsa eveniet ipsum voluptatum minus dolores repellendus atque natus.
+                </div>
+                <div class="p-2 fullwidth">
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-outline-dark newclass"
+                            onclick="modals.rules.close();">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="records">
+            <div class="d-flex align-items-start flex-column modalMain">
+                <div class="mb-auto p-2">
+                    <h4>RECORDS TAB:</h4>
+                    <ul id="scorelist" class="list-group"></ul>
+                </div>
+                <div class="p-2 fullwidth">
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-outline-dark newclass"
+                            onclick="modals.records.close();">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="register">
+            <div class="d-flex align-items-start flex-column modalMain">
+                <div class="mb-auto p-2 fullwidth">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <h1>Enter your name:</h1>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="input-group mb-3 minsize">
+                            <input id="userNameValue" value="" type="text" class="form-control"
+                                aria-describedby="button-addon2">
+                            <div class="input-group-append">
+                                <button onclick="setUserName();" class="btn btn-outline-secondary" type="button"
+                                    id="button-addon2">Ok</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 fullwidth">
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-outline-dark newclass"
+                            onclick="modals.register.close();">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="nomoney">
+            <div class="d-flex align-items-start flex-column modalMain">
+                <div class="mb-auto p-2 fullwidth">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <h4>You don't have enough money!</h4>
+                    </div>
+                </div>
+                <div class="p-2 fullwidth">
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-outline-dark newclass"
+                            onclick="modals.nomoney.closeDM();">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tostartgame">
+            <div class="d-flex align-items-start flex-column modalMain">
+                <div class="mb-auto p-2 fullwidth">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <h4>To start playing, enter your name</h4>
+                    </div>
+                </div>
+                <div class="p-2 fullwidth">
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-outline-dark newclass"
+                            onclick="modals.tostartgame.closeDM();">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="endgame">
+            <div class="d-flex align-items-start flex-column modalMain">
+                <div class="mb-auto p-2 fullwidth">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <h3>GAME OVER</h3>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <h5>Your score: </h5>
+                        <h4 id="gameoverscore">0</h4>
+                    </div>
+                </div>
+                <div class="p-2 fullwidth">
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-outline-dark newclass"
+                            onclick="modals.endgame.close();">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="canvas-wrap" class="canvas-wrap">
+            <canvas id="canvas" width="1920" height="1080"></canvas>
+        </div>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>
